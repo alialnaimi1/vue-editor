@@ -72,6 +72,7 @@ class customHandler extends ImageHandler {
    constructor(provider) {
     super(provider)
     this.uploadUrl = 'https://' + provider.uploadUrl
+    this.imgPath = 'https://'+provider.imgPath
   }
   makeForm(file) {
     const data = new FormData()
@@ -80,7 +81,7 @@ class customHandler extends ImageHandler {
     return data
   }
   urlFromResponse(xhr) {
-    return `${this.provider.imgPath}/${xhr.responseText}`
+    return `${this.imgPath}/${xhr.responseText}`
   }
 }
 
