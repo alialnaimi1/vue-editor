@@ -68,6 +68,22 @@ class Qiniuhandler extends ImageHandler {
   }
 }
 
+class customHandler extends ImageHandler {
+   constructor(provider) {
+    super(provider)
+    this.uploadUrl = 'https://' + provider.uploadUrl
+  }
+  makeForm(file) {
+    const data = new FormData()
+    data.append('name', file.name)
+    data.append('file', file)
+    return data
+  }
+  urlFromResponse(xhr) {
+    return `${this.imgPath}/${xhr.responseText}`
+  }
+}
+
 class AliHandler extends ImageHandler {
   constructor(provider) {
     super(provider)
@@ -95,6 +111,9 @@ function getHandler(provider) {
   }
   if (provider.name == 'qiniu') {
     return new Qiniuhandler(provider)
+  }
+  if (provider.name == 'customHandler') {
+    return new customHandler(provider)
   }
   throw `Un supported provider ${provider.name}`
 }
