@@ -80,7 +80,7 @@ class customHandler extends ImageHandler {
     return data
   }
   urlFromResponse(xhr) {
-    return `${this.imgPath}/${xhr.responseText}`
+    return `${this.provider.imgPath}/${xhr.responseText}`
   }
 }
 
